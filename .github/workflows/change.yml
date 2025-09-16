@@ -21,6 +21,6 @@ jobs:
         AZURE_TENANT_ID: ${{ secrets.DEVTEST_AZURE_TENANT_ID }}
         AZURE_SUBSCRIPTION_ID: ${{ secrets.DEVTEST_AZURE_SUBSCRIPTION_ID }}
     
-    - name: Terraform Init
-        run: |
-          terraform init
+    - name: Terraform Format
+      run: |
+        terraform fmt
