@@ -1,0 +1,86 @@
+# Copy this file to terraform.tfvars and customize the values
+
+# Resource Group Configuration
+resource_group_name = "rg-ai-feature"
+location           = "West Europe"
+
+# Project Configuration
+project_name = "helloterra"
+
+# Container App Environment Configuration
+# Leave empty to create a new one, or specify existing environment name
+container_app_environment_name = ""
+
+# Container App Configuration
+# Leave empty to use project_name, or specify custom container app name
+container_app_name = ""
+
+# Log Analytics Workspace Configuration
+# Leave empty to use project_name-logs, or specify custom workspace name
+log_analytics_workspace_name = ""
+
+# Key Vault Configuration
+# Leave empty to not use Key Vault, or specify existing Key Vault name
+key_vault_name = ""
+# Leave empty to use main resource group, or specify Key Vault resource group
+key_vault_resource_group_name = ""
+
+# Container Configuration
+container_image = "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
+target_port     = 80
+
+# Scaling Configuration
+min_replicas = 0
+max_replicas = 10
+
+# Ingress Configuration
+enable_ingress = true
+
+# HTTP Scaling Configuration
+http_scaler_concurrent_requests = 20
+
+# Memory Scaling Configuration
+memory_scaling_threshold = 80
+
+# CPU Scaling Configuration
+cpu_scaling_threshold = 70
+
+# Resource Configuration
+cpu_requests    = "0.25"
+memory_requests = "0.5Gi"
+
+# Container Registry Configuration
+container_registry_host = "your-registry.azurecr.io"
+container_registry_username = "your-registry-username"
+
+# Container Environment Variables
+container_env_variables = {
+  ENVIRONMENT = "production"
+  VERSION     = "1.0.0"
+  DEBUG       = "false"
+  # Add your custom environment variables here
+}
+
+# Container Environment Variables from Secret
+container_env_secrets = {
+  # Add your secret environment variables here
+  # SECRET_VAR = "secret-name"
+}
+
+# Container Secrets
+container_secrets = {
+  # Add your secrets here
+  # secret-name = "your-secret-value"
+  
+  # Key Vault references for secrets (just the URL, no @Microsoft.KeyVault wrapper)
+  # secret-name = "https://your-keyvault.vault.azure.net/secrets/secret-name"
+  # container-registry-password = "https://your-keyvault.vault.azure.net/secrets/CONTAINER-REGISTRY-PASSWORD"
+}
+
+# Tags
+tags = {
+  Environment = "Development"
+  Project     = "HelloTerra"
+  ManagedBy   = "Terraform"
+  Owner       = "Your Name"
+}

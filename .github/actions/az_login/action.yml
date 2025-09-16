@@ -1,0 +1,27 @@
+name: 'NexiusAI Azure Login Action'
+description: 'NexiusAI Azure Login Action for authenticating with Azure using a service principal.'
+inputs:
+  AZURE_CLIENT_ID:
+    description: 'Azure client ID'
+    required: true
+  AZURE_CLIENT_SECRET:
+    description: 'Azure client secret'
+    required: true
+  AZURE_TENANT_ID:
+    description: 'Azure tenant ID'
+    required: true
+  AZURE_SUBSCRIPTION_ID:
+    description: 'Azure subscription ID'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y curl
+        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    - name: Login to Azure
+      shell: bash
+      run: az login --service-principal -u ${{ inputs.AZURE_CLIENT_ID }} -p ${{ inputs.AZURE_CLIENT_SECRET }} --tenant ${{ inputs.AZURE_TENANT_ID }} && az account set --subscription ${{ inputs.AZURE_SUBSCRIPTION_ID }}

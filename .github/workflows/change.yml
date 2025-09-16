@@ -1,0 +1,23 @@
+name: Terraform Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Azure Login
+      uses: .github/actions/az_login
+      with:
+        AZURE_CLIENT_ID: ${{secrets.DEVTEST_AZURE_CLIENT_ID}}
+        AZURE_CLIENT_SECRET: ${{secrets.DEVTEST_AZURE_CLIENT_SECRET }}
+        AZURE_TENANT_ID: ${{ secrets.DEVTEST_AZURE_TENANT_ID }}
+        AZURE_SUBSCRIPTION_ID: ${{ secrets.DEVTEST_AZURE_SUBSCRIPTION_ID }}
+        
