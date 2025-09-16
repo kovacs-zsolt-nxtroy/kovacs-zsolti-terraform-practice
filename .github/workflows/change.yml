@@ -15,12 +15,14 @@ jobs:
     
     - name: Azure Login
       uses: ./.github/actions/az_login
+      if: false
       with:
         AZURE_CLIENT_ID: ${{secrets.DEVTEST_AZURE_CLIENT_ID}}
         AZURE_CLIENT_SECRET: ${{secrets.DEVTEST_AZURE_CLIENT_SECRET }}
         AZURE_TENANT_ID: ${{ secrets.DEVTEST_AZURE_TENANT_ID }}
         AZURE_SUBSCRIPTION_ID: ${{ secrets.DEVTEST_AZURE_SUBSCRIPTION_ID }}
     
-    - name: Terraform Format
-      run: |
-        terraform fmt
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_wrapper: false
