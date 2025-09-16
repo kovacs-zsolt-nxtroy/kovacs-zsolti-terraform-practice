@@ -14,6 +14,7 @@ inputs:
     description: 'Azure subscription ID'
     required: true
 runs:
+  using: 'composite'
   steps:
     - name: Login to Azure
       shell: bash
